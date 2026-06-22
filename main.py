@@ -58,7 +58,7 @@ if st.button("정산하기"):
     for drink in drinks:
         calc.add_item(drink)
     
-    result, details = clac.calculate()
+    result, details = calc.calculate()
     st.session_state.result = result
     st.session_state.details = details
 
