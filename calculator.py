@@ -1,5 +1,7 @@
 from dataclasses import dataclasses
 import random
+import hashlib
+import json
 
 class SettlementItem:
     name : str
@@ -8,9 +10,10 @@ class SettlementItem:
     memo : str = ""
 
 class SettlementCalculator:
-    def __init__(self, people, unit=100):
+    def __init__(self, people, unit=100, seed = None):
         self.people = people
         self.unit = unit
+        self.rng = random.Random(seed)
         self.items = []
         self.result = {person : 0 for person in people}
         self.details = {person : [] for person in people}
@@ -38,7 +41,7 @@ class SettlementCalculator:
         extra_count = (remainder // self.unit)
 
         if extra_count > 0:
-            selected = random.sample(list(set(item.shares)),
+            selected = self.rng.sample(list(set(item.shares)),
             min(extra_count, len(set(item.shares))))
             for person in selected:
                 result[person] += self.unit
@@ -59,3 +62,21 @@ class SettlementCalculator:
                 self.details[person].extend(detail_list)
         
         return self.result, self.details
+
+def generate_seed(people, items, unit):
+    seed_data = {
+        "people" : sorted(people),
+        "unit" : unit
+        "items" : [
+            {
+                "name": item.name,
+                "price": item.price,
+                "shares": sorted(item.shares)
+            }
+            for item in items
+        ]
+    }
+
+    seed_text = json.dumps(seed_data, ensure_ascii = False)
+
+    return int(hashlib.sha256(seed_text.encode().hexdigest(),16))

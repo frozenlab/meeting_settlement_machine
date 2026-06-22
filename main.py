@@ -1,9 +1,15 @@
 import streamlit as st
-from calculater import SettlementCalculator, SettlementItem
+from calculater import SettlementCalculator, SettlementItem, generate_seed
 from excel_export import create_excel
 
 st.set_page_config(page_title = "모임 정산기")
 st.title("💰 모임 정산기")
+if "result" not in st.session_state:
+    st.session_state.result = None
+if "details" not in st.session_state:
+    st.session_state.details = None
+if "last_hash" not in st.session_state:
+    st.session_state.last_hash = None
 
 people_text = st.text_area("참가자", placeholder = "철수\n영희\n민수")
 people = [p.strip() for p in people_text.split("\n") if p.strip()]
@@ -32,14 +38,29 @@ for i in range(drink_count):
         drinks.append(SettlementItem(name=name, price=price, shares = shares,
         memo = memo))
 
+current_hash = generate_seed(
+    people,
+    [
+        SettlementItem(
+            "음식",
+            food_price,
+            people
+        ),
+        *drinks
+    ],
+    unit
+)
+
 if st.button("정산하기"):
-    calc = SettlementCalculator(people, unit)
+    calc = SettlementCalculator(people, unit, seed_current_hash)
     calc.add_item(SettlementItem(name="음식", price=food_price, shares=people))
 
     for drink in drinks:
         calc.add_item(drink)
     
     result, details = clac.calculate()
+    st.session_state.result = result
+    st.session_state.details = details
 
     st.subheader("정산 결과")
     summary_text = ("[모임 정산]\n\n")
