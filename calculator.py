@@ -80,4 +80,4 @@ def generate_seed(people, items, unit):
 
     seed_text = json.dumps(seed_data, ensure_ascii = False)
 
-    return int(hashlib.sha256(seed_text.encode().hexdigest(),16))
+    return int(hashlib.sha256(seed_text.encode()).hexdigest(),16)
