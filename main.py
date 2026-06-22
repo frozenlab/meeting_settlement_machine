@@ -52,7 +52,7 @@ current_hash = generate_seed(
 )
 
 if st.button("정산하기"):
-    calc = SettlementCalculator(people, unit, seed_current_hash)
+    calc = SettlementCalculator(people, unit, seed = current_hash)
     calc.add_item(SettlementItem(name="음식", price=food_price, shares=people))
 
     for drink in drinks:
