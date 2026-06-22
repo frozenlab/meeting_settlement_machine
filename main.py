@@ -1,6 +1,23 @@
 import streamlit as st
 import random
 
+class SettlementItem:
+    def __init__(self, name, price, shares, memo = ""):
+        self.name = name
+        self.price = price
+        self.shares = shares
+        self.memo = memo
+
+class SettlementCalculator:
+    def __init__(self, people, unit = 100):
+        self.people = people
+        self.unit = unit
+        self.items = []
+        self.result = {p: 0 for p in people}
+        self.details = {p: [] for p in people}
+
+    def add_it
+"""
 st.set_page_config(page_title="모임 정산기")
 
 st.title("💰 모임 정산기")
@@ -183,3 +200,4 @@ if st.button("정산하기"):
         reverse=True
     ):
         st.write(f"**{person}** : {amount:,}원")
+"""
