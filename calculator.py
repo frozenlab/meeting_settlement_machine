@@ -46,7 +46,7 @@ class SettlementCalculator:
             min(extra_count, len(set(item.shares))))
             for person in selected:
                 result[person] += self.unit
-                details[pserson].append(
+                details[person].append(
                     f"{item.name} +{self.unit:, }원"
                 )
         
