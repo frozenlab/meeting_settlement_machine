@@ -75,7 +75,7 @@ if st.button("정산하기"):
     st.subheader("카카오톡 공유용")
     st.code(summary_text, language=None)
 
-    excel_data = create_excel(result, details, calc.itmes, food_price, unit)
+    excel_data = create_excel(result, details, calc.items, food_price, unit)
     st.download_button("📊 엑셀 다운로드",
         data=excel_data,
         file_name="모임정산.xlsx",
