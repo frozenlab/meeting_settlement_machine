@@ -66,7 +66,7 @@ class SettlementCalculator:
 def generate_seed(people, items, unit):
     seed_data = {
         "people" : sorted(people),
-        "unit" : unit
+        "unit" : unit,
         "items" : [
             {
                 "name": item.name,
