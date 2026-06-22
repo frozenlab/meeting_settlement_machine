@@ -1,4 +1,4 @@
-from dataclasses import dataclasses
+from dataclasses import dataclass
 import random
 import hashlib
 import json
