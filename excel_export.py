@@ -31,6 +31,15 @@ def create_excel(result, details, items, food_price, unit):
         ]
     )
 
+    food_df = pd.DataFrame(
+        [
+            {
+                "음식총액": food_price,
+                "잔액처리단위": unit
+            }
+        ]
+    )
+
     buffer = BytesIO()
 
     with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
