@@ -3,6 +3,7 @@ import random
 import hashlib
 import json
 
+@dataclass
 class SettlementItem:
     name : str
     price : int
