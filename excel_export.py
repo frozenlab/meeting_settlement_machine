@@ -13,7 +13,7 @@ def create_excel(result, details, items, food_price, unit):
     )
     detail_rows = []
 
-    for person, detali_list in details.items():
+    for person, detail_list in details.items():
         for detail in detail_list:
             detail_rows.append({
                 "이름" : person, "내역" : detail
