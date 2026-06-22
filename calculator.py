@@ -47,7 +47,7 @@ class SettlementCalculator:
             for person in selected:
                 result[person] += self.unit
                 details[person].append(
-                    f"{item.name} +{self.unit:, }원"
+                    f"{item.name} +{self.unit:,}원"
                 )
         
         return result, details
